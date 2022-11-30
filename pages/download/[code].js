@@ -50,11 +50,10 @@ export default function Download() {
             setFileName("File not Found");
         }
     }
-
-    if (!functioncalled) {
-        functioncalled = true;
-        getFile();
-    }
+    
+    useEffect(() => {
+      getFile();
+    })
 
     return (
       <div className={styles.container}>
