@@ -60,8 +60,17 @@
   color: white;
 }
 
+.input[type=password]:disabled {
+  background: rgb(44, 44, 44);
+  color: #232323;
+}
+
 .input::placeholder {
   color: white;
+}
+
+.input[type=password]::placeholder:disabled {
+  color: #232323;
 }
 
 .input[type=file] {

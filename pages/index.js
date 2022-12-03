@@ -7,10 +7,11 @@ import { useRouter } from 'next/router'
 
 export default function Home() {
   const router = useRouter()
+  const [error, setError] = useState('');
   const [password, setPassword] = useState("");
   const [File, setFile] = useState(null);
 
-  const apiURL = "http://local.tarek-laun.de:5001";
+  const apiURL = "http://api.filex.lkind.net:5001";
 
   const uploadFileToClient = (e) => {
     if (e.target.files && e.target.files[0]) {
@@ -37,25 +38,25 @@ export default function Home() {
 
       // Upload File
 
-      const secondData = {
-        ApiKey: "e0488f14-218e-418d-8fe8-1b7e45ac44ca",
-        file: File
-      }
-
-      console.log(secondData);
-
       const body = new FormData();
       body.append("ApiKey", "e0488f14-218e-418d-8fe8-1b7e45ac44ca");
       body.append("file", File);
-
-      const res2 = await axios.post(apiURL + "/file?c=" + res.data["Code"], body);
-      console.log(`Status: ${res2.status}`)
-      console.log('Body: ', res2.data)
-      
-      router.push("/download/" + res2.data["Code"])
-
+      try {
+        const res2 = await axios.post(apiURL + "/file?c=" + res.data["Code"], body);
+        console.log(`Status: ${res2.status}`)
+        console.log('Data: ', res2.data)
+  
+        if (res2.data["Error"] != null) {
+          console.log(res2.data["Error"]);
+          setError(res2.data["Error"]);
+        }else {
+          router.push("/download/" + res2.data["Code"])
+        }
+      }catch {
+        setError("Currently out of Service.");
+      }
     }catch{
-
+      setError("Currently out of Service.");
     }
   }
 
@@ -78,10 +79,14 @@ export default function Home() {
         <rect x="0" y="0" width="100" height="100" fill="url(#grad1)" mask="url(#fade)"/>
       </svg>
       <div className={styles.Login}>
-        <h1 className={styles.h1}>File <span style={{color:"#00c3ff"}}>X</span></h1>
+        <a href='/'><h1 className={styles.h1}>File <span style={{color:"#00c3ff"}}>X</span></h1></a>
         <h2 className={styles.h2}>Upload:</h2>
         <p>Files are deleted after 5 minutes.</p>
         <form onSubmit={upload}>
+          {error
+          ?<p style={{color: "#e35959", margin: 0}}>Error: {error}</p>
+          :<p></p>
+          }
           <input className={styles.input} onChange={uploadFileToClient} type="file"/>
           <input className={styles.input} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="Password"/>
           <input className={styles.input} type="submit" value="Upload"/>
