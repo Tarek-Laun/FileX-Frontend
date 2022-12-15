@@ -4,14 +4,13 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 const axios = require('axios');
 import { useRouter } from 'next/router'
+const api = require('../lib/api');
 
 export default function Home() {
   const router = useRouter()
   const [error, setError] = useState('');
   const [password, setPassword] = useState("");
   const [File, setFile] = useState(null);
-
-  const apiURL = "http://api.filex.lkind.net:5001";
 
   const uploadFileToClient = (e) => {
     if (e.target.files && e.target.files[0]) {
@@ -28,21 +27,21 @@ export default function Home() {
 
       const firstData = {
         Creator: 0,
-        ApiKey: "e0488f14-218e-418d-8fe8-1b7e45ac44ca",
+        ApiKey: api.APIKEY,
         Password: password
       }
 
-      const res = await axios.post(apiURL + "/upload", firstData);
+      const res = await axios.post(api.APIURL + "/upload", firstData);
       console.log(`Status: ${res.status}`)
       console.log('Body: ', res.data["Code"])
 
       // Upload File
 
       const body = new FormData();
-      body.append("ApiKey", "e0488f14-218e-418d-8fe8-1b7e45ac44ca");
+      body.append("ApiKey", api.APIKEY);
       body.append("file", File);
       try {
-        const res2 = await axios.post(apiURL + "/file?c=" + res.data["Code"], body);
+        const res2 = await axios.post(api.APIURL + "/file?c=" + res.data["Code"], body);
         console.log(`Status: ${res2.status}`)
         console.log('Data: ', res2.data)
   

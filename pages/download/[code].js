@@ -1,9 +1,8 @@
-import Head from 'next/head'
 import { useState, useEffect  } from "react";
-import Image from 'next/image'
 import styles from '../../styles/Home.module.css'
 const axios = require('axios');
 import { useRouter } from 'next/router'
+const api = require('../../lib/api');
 
 export default function Download() {
     const router = useRouter()
@@ -12,15 +11,13 @@ export default function Download() {
     const [filename, setFileName] = useState('');
     const [hasPwd, setHasPwd] = useState(false);
   
-    const apiURL = "http://api.filex.lkind.net:5001";
-  
     var download = async (e) => {
         e.preventDefault();
         const body = new FormData();
         body.append("Code", code);
         body.append("Password", password);
 
-        fetch(apiURL + "/download", {body: body, method: "post"})
+        fetch(api.APIURL + "/download", {body: body, method: "post"})
         .then((res) => { return res.blob(); })
         .then((data) => {
         var a = document.createElement("a");
@@ -38,11 +35,11 @@ export default function Download() {
         }
         try {
             const firstData = {
-              ApiKey: "e0488f14-218e-418d-8fe8-1b7e45ac44ca",
+              ApiKey: api.APIKEY,
               Code: code
             }
 
-            const res = await axios.post(apiURL + "/getName", firstData);
+            const res = await axios.post(api.APIURL + "/getName", firstData);
             console.log(`Status: ${res.status}`);
             console.log('Body: ', res.data);
 
@@ -80,7 +77,7 @@ export default function Download() {
         <div className={styles.Login}>
           <a href='/'><h1 className={styles.h1}>File <span style={{color:"#00c3ff"}}>X</span></h1></a>
           <h2 className={styles.h2}>Download: {code}</h2>
-          <form method='post' action="http://localhost:5001/download">
+          <form method='post' action="https://filex.lkind.net:8443/download">
             {error
             ?<p style={{color: "#e35959", margin: 0}}>Error: {error}</p>
             :<p></p>
