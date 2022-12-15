@@ -27,7 +27,10 @@ export default function Home() {
       <div className={styles.Login}>
         <a href='/'><h1 className={styles.h1}>File <span style={{color:"#00c3ff"}}>X</span></h1></a>
         <h2>Datenschutzt</h2>
+        <h3>Daten:</h3>
         <p>Alle Daten(Files, Passwörter, etc) werden nach 5 Minuten wieder unwiderruflich gelöscht.</p>
+        <h3>Cookies</h3>
+        <p>Wir speichern keine Cookies.</p>
         <a href='/imp'> Impressum </a>
         <a href='/ds'> Datenschutzt </a>
       </div>
