@@ -62,6 +62,7 @@ export default function Home() {
 
   return (
     <div className={styles.container}>
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8847009997817810" crossorigin="anonymous"></script>
       <img src='logo-no-background.svg' className={styles.lkiLogo}></img>
       <svg viewBox="0 0 100 100" width="100%" height="100%" style={{height: 100 + "%", position: "absolute"}} preserveAspectRatio="xMaxYMin meet">
         <defs>

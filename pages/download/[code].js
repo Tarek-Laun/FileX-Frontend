@@ -29,7 +29,6 @@ export default function Download() {
     }
 
     var getFile = async function() {
-        console.log("Call This Function");
         if (code == null) {
             return;
         }
@@ -45,6 +44,8 @@ export default function Download() {
 
             setFileName(res.data["Name"]);
             setHasPwd(res.data["Password"]);
+            navigator.clipboard.writeText("https://filex.lkind.net/download/" + code);
+            // TODO: Notify User about Link Copy
         }catch {
             setError("File not Found.");
         }
