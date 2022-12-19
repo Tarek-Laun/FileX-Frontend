@@ -92,7 +92,7 @@
   margin: 0em;
   margin-right: 0.4em;
   background: rgb(89,131,255);
-  background: linear-gradient(45deg, #00c3ff 16%, #0099ff 100%);
+  background: linear-gradient(45deg, #04bfad 16%, #007166 100%);
   color: white;
   font-weight: bold;
 }
@@ -105,14 +105,14 @@
   margin-top: 0.5em;
   margin-bottom: 0.5em;
   background: rgb(89,131,255);
-  background: linear-gradient(45deg, #00c3ff 16%, #0099ff 100%);
+  background: linear-gradient(45deg, #04bfad 16%, #007166 100%);
   color: white;
   font-weight: bold;
 }
 
 .input[type=submit]:hover {
   background: rgb(69,101,195);
-  background: linear-gradient(45deg, #00a2d3 16%, #0078c9 100%);
+  background: linear-gradient(45deg, #038a7c 16%, #00554c 100%);
 }
 
 /* Tablet */

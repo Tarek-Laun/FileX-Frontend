@@ -20,6 +20,15 @@ export default function Home() {
     }
   };
 
+  const pingBackend = async () => {
+    try {
+      const res = await axios.get(api.APIURL + "/status");
+      console.log(res);
+    }catch {
+      setError("Currently out of Service.");
+    }
+  };
+
   const upload = async (e) => {
     e.preventDefault();
     try {
@@ -49,6 +58,7 @@ export default function Home() {
           console.log(res2.data["Error"]);
           setError(res2.data["Error"]);
         }else {
+          navigator.clipboard.writeText("https://filex.lkind.net/download/" + res2.data["Code"]);
           router.push("/download/" + res2.data["Code"])
         }
       }catch {
@@ -59,6 +69,9 @@ export default function Home() {
     }
   }
 
+  useEffect(() => {
+    pingBackend();
+  })
 
   return (
     <div className={styles.container}>
@@ -67,8 +80,8 @@ export default function Home() {
       <svg viewBox="0 0 100 100" width="100%" height="100%" style={{height: 100 + "%", position: "absolute"}} preserveAspectRatio="xMaxYMin meet">
         <defs>
           <linearGradient id="grad1" x1="0%" y1="75%" x2="100%" y2="0%">
-            <stop offset="20%" stopColor="#54c5ff" stopOpacity="1" />
-            <stop offset="100%" stopColor="#1650ff" stopOpacity="1"/>
+            <stop offset="20%" stopColor="#04bfad" stopOpacity="1" />
+            <stop offset="100%" stopColor="#007166" stopOpacity="1"/>
           </linearGradient>
         </defs>
         <mask id="fade" opacity="1.0">
@@ -79,7 +92,7 @@ export default function Home() {
         <rect x="0" y="0" width="100" height="100" fill="url(#grad1)" mask="url(#fade)"/>
       </svg>
       <div className={styles.Login}>
-        <a href='/'><h1 className={styles.h1}>File <span style={{color:"#00c3ff"}}>X</span></h1></a>
+        <a href='/'><h1 className={styles.h1}>File <span style={{color:"#04bfad"}}>X</span></h1></a>
         <h2 className={styles.h2}>Upload:</h2>
         <p>Files are deleted after 5 minutes.</p>
         <form onSubmit={upload}>
