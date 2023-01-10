@@ -6,7 +6,6 @@ const axios = require('axios');
 import { useRouter } from 'next/router'
 
 export default function Home() {
-
   return (
     <div className={styles.container}>
       <img src='logo-no-background.svg' className={styles.lkiLogo}></img>
@@ -30,7 +29,7 @@ export default function Home() {
         <h3>Daten:</h3>
         <p>Alle Daten(Files, Passwörter, etc) werden nach 5 Minuten wieder unwiderruflich gelöscht.</p>
         <h3>Cookies</h3>
-        <p>Wir speichern keine Cookies.</p>
+        <p>Unser Service speichert keine Cookies, nur <a href='https://www.cloudflare.com'>Cloudflare</a> speichert System relevante Cookies.</p>
         <a href='/imp'> Impressum </a>
         <a href='/ds'> Datenschutzt </a>
       </div>

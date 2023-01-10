@@ -27,7 +27,7 @@ export default function Download() {
       });
   }
   
-  var getFile = async function() {
+  var getFile = async () => {
       if (code == null) {
           return;
       }
